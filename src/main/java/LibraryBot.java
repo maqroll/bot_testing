@@ -1,3 +1,5 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.AnswerInlineQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LibraryBot extends TelegramLongPollingBot {
+  private static Logger LOGGER = LoggerFactory.getLogger(LibraryBot.class);
   private final List<Library> libraries;
   private final String botToken;
 
@@ -53,10 +56,12 @@ public class LibraryBot extends TelegramLongPollingBot {
 
       Location location = update.getInlineQuery().getLocation();
 
+      LOGGER.debug("Request from {}",location);
+
       List<Library> nearLibrariesSorted = LibraryUtil.nearFrom(libraries, new BigDecimal(location.getLongitude()),
           new BigDecimal(location.getLatitude()),
           7);
-      
+
       InlineQueryResultArticleBuilder builder = InlineQueryResultArticle.builder();
 
       List<InlineQueryResult> results = nearLibrariesSorted.stream().map(library -> builder.
