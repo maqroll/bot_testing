@@ -53,13 +53,10 @@ public class LibraryBot extends TelegramLongPollingBot {
 
       Location location = update.getInlineQuery().getLocation();
 
-      long init = System.currentTimeMillis();
       List<Library> nearLibrariesSorted = LibraryUtil.nearFrom(libraries, new BigDecimal(location.getLongitude()),
           new BigDecimal(location.getLatitude()),
           7);
-
-      System.out.println(System.currentTimeMillis() - init);
-
+      
       InlineQueryResultArticleBuilder builder = InlineQueryResultArticle.builder();
 
       List<InlineQueryResult> results = nearLibrariesSorted.stream().map(library -> builder.
