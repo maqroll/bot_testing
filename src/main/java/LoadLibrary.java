@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -12,7 +14,10 @@ public class LoadLibrary {
   public static List<Library> get() throws IOException {
     List<Library> libraries = new ArrayList<>();
 
-    try (BufferedReader br = Files.newBufferedReader(Paths.get("libraries.csv"))) {
+    ClassLoader classLoader = LoadLibrary.class.getClassLoader();
+    URL resource = classLoader.getResource("libraries.csv");
+
+    try (BufferedReader br = Files.newBufferedReader(new File(resource.getFile()).toPath())) {
       String line;
       boolean headerLoaded = false;
 
