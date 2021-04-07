@@ -15,3 +15,9 @@ spec:
       containers:
       - name: library-bot
         image: okteto.dev/library-bot:latest
+        env:
+          - name: BOT_TOKEN
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: BOT_TOKEN
