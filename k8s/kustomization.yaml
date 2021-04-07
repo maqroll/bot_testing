@@ -4,3 +4,5 @@ configMapGenerator:
   - name: env-config
     files:
       - config.yaml
+resources:
+  - deployment.yaml

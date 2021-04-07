@@ -1,4 +1,4 @@
 deploy:
   - envsubst < k8s/config.template.yaml > k8s/config.yaml
   - okteto build -t okteto.dev/library-bot:latest
-  - kubectl apply -f k8s
+  - kubectl apply -k k8s/.
