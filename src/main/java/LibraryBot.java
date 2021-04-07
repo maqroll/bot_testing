@@ -15,9 +15,11 @@ import java.util.stream.Collectors;
 
 public class LibraryBot extends TelegramLongPollingBot {
   private final List<Library> libraries;
+  private final String botToken;
 
-  public LibraryBot(List<Library> libraries) {
+  public LibraryBot(List<Library> libraries, String botToken) {
     this.libraries = libraries;
+    this.botToken = botToken;
   }
 
   @Override
@@ -27,7 +29,7 @@ public class LibraryBot extends TelegramLongPollingBot {
 
   @Override
   public String getBotToken() {
-    return "mytoken";
+    return botToken;
   }
 
   @Override
