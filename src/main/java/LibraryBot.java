@@ -37,7 +37,6 @@ public class LibraryBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    // We check if the update has a message and the message has text
     if (update.hasMessage() && update.getMessage().hasText()) {
       SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
       message.setChatId(update.getMessage().getChatId().toString());
@@ -68,7 +67,7 @@ public class LibraryBot extends TelegramLongPollingBot {
           title(library.getName()).
           description(library.getCode()).
           id(library.getCode()).
-          inputMessageContent(new InputTextMessageContent("hola")).build()).collect(Collectors.toList());
+          inputMessageContent(new InputTextMessageContent(library.getName())).build()).collect(Collectors.toList());
 
       res.setResults(results);
 
