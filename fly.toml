@@ -1,0 +1,9 @@
+# fly.toml file generated for solitary-river-5379 on 2021-04-19T17:17:29+02:00
+
+app = "solitary-river-5379"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[env]
+
