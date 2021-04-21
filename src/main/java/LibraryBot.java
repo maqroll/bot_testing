@@ -50,6 +50,8 @@ public class LibraryBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
+    // abert@s info doesn't include branch code
+    // so I can't use the koha api to search for isbn taking into account branch info
     if (update.hasInlineQuery()) {
       InlineQuery inlineQuery = update.getInlineQuery();
       AnswerInlineQuery res = new AnswerInlineQuery();
@@ -57,7 +59,7 @@ public class LibraryBot extends TelegramLongPollingBot {
       res.setResults(Collections.emptyList());
       res.setIsPersonal(true); /* no cache */
 
-      if (inlineQuery.getQuery() != null && !inlineQuery.getQuery().isEmpty()) {
+      if (inlineQuery.getQuery() != null && inlineQuery.getQuery().isEmpty()) {
         Location location = inlineQuery.getLocation();
 
         if (location != null) {
